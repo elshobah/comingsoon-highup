@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>High Up Management — Coming Soon</title>
+  <meta name="description" content="High Up Management — Dubai, UAE. Official site launching soon." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0e13; --card:#0f141b; --muted:#92a2b3; --text:#ecf1f9; --accent:#39d2c0; --accent-2:#6aa5ff;
+      --radius:22px; --glass: rgba(255,255,255,0.05);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Urbanist,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1200px 700px at 10% 10%, #111827 0%, #0b0e13 50%), var(--bg); color:var(--text);}
+    .grid{display:grid; grid-template-columns: 1.15fr 1fr; min-height:100dvh}
+    .left{padding: clamp(24px, 4vw, 56px); position:relative; display:flex; flex-direction:column; gap:28px}
+    .nav{display:flex; align-items:center; justify-content:space-between}
+    .brand{display:flex; gap:12px; align-items:center}
+    .logo{width:40px;height:40px;border-radius:12px; background: linear-gradient(135deg,var(--accent),var(--accent-2)); display:grid; place-items:center; font-weight:800; color:#001318}
+    h1{font-size: clamp(28px, 5vw, 52px); line-height:1.05; margin:0}
+    p{margin:0; color:var(--muted); font-size: clamp(14px, 1.6vw, 18px)}
+    .card{background:var(--glass); border:1px solid rgba(255,255,255,0.06); backdrop-filter: blur(14px); border-radius: var(--radius); padding:24px}
+    .pill{display:inline-flex; gap:8px; align-items:center; background: rgba(57,210,192,0.12); color:#bdf4ec; border:1px solid rgba(57,210,192,0.35); padding:8px 12px; border-radius:999px; font-size:12px; letter-spacing:.4px; text-transform:uppercase}
+    .countdown{display:flex; gap:14px; flex-wrap:wrap}
+    .time{flex:1 1 110px; min-width:110px; text-align:center; padding:18px; border-radius:16px; border:1px solid rgba(255,255,255,0.06); background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));}
+    .time .num{font-size: clamp(28px, 4vw, 40px); font-weight:800}
+    .time .lab{font-size:12px; letter-spacing:.3px; color:var(--muted)}
+    .form{display:flex; gap:10px; margin-top:8px}
+    input[type=email]{flex:1; padding:14px 16px; border-radius:12px; background:#0b0f16; border:1px solid rgba(255,255,255,0.06); color:var(--text)}
+    button{padding:14px 18px; border-radius:12px; border:none; font-weight:600; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#001318; cursor:pointer}
+    .socials{display:flex; gap:12px; align-items:center}
+    .socials a{display:grid; place-items:center; width:40px; height:40px; border-radius:12px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03)}
+    .foot{margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .splineWrap{position:relative; height:100%; overflow:hidden}
+    .spline{position:absolute; inset:0; border:0; width:100%; height:100%}
+    .splineOverlay{position:absolute; inset:auto 0 0 0; padding:18px 24px; display:flex; justify-content:space-between; align-items:center; background:linear-gradient(180deg, transparent, rgba(11,14,19,0.45) 40%, rgba(11,14,19,0.85));}
+    .tag{font-size:12px; color:#9bb0c7}
+    .chip{padding:6px 10px; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); font-size:12px}
+    .blurOrb{position:absolute; filter:blur(80px); opacity:.6; pointer-events:none}
+    .orb1{top: -60px; left:-60px; width:220px; height:220px; background:radial-gradient(circle at 30% 30%, #3fd8c7, transparent 60%)}
+    .orb2{bottom: 10%; right:-60px; width:260px; height:260px; background:radial-gradient(circle at 70% 30%, #6aa5ff, transparent 60%)}
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+      .splineWrap{height:52vh}
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <!-- Left | Content -->
+    <section class="left">
+      <div class="nav">
+        <div class="brand">
+          <div class="logo">HU</div>
+          <div>
+            <strong style="font-size:18px; letter-spacing:.3px">High Up Management</strong><br>
+            <span style="font-size:12px; color:var(--muted)">Dubai, UAE</span>
+          </div>
+        </div>
+        <a class="chip" href="mailto:ayu@highup.ae">Contact</a>
+      </div>
+
+      <span class="pill">Official Website</span>
+      <h1>We're building something extraordinary.</h1>
+      <p>From exhibitions and events to signage and project solutions — our new digital home is almost ready.</p>
+
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px">
+          <strong>Launch Countdown</strong>
+          <span class="tag" id="launchLabel"></span>
+        </div>
+        <div class="countdown" id="countdown">
+          <div class="time"><div class="num" id="d">–</div><div class="lab">Days</div></div>
+          <div class="time"><div class="num" id="h">–</div><div class="lab">Hours</div></div>
+          <div class="time"><div class="num" id="m">–</div><div class="lab">Minutes</div></div>
+          <div class="time"><div class="num" id="s">–</div><div class="lab">Seconds</div></div>
+        </div>
+        <form class="form" onsubmit="event.preventDefault(); alert('Thanks! We\'ll notify you.'); this.reset();">
+          <input type="email" placeholder="Your email" required>
+          <button type="submit">Notify Me</button>
+        </form>
+      </div>
+
+      <div style="display:flex; gap:16px; align-items:center">
+        <div class="socials">
+          <a aria-label="Instagram" href="#" title="Instagram"> 
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Z" stroke="currentColor" opacity=".6"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z" stroke="currentColor"/><circle cx="17.5" cy="6.5" r="1.25" fill="currentColor"/></svg>
+          </a>
+          <a aria-label="LinkedIn" href="#" title="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.94 8.5H3.75v11.75h3.19V8.5ZM5.35 3.75a1.88 1.88 0 1 0 0 3.75 1.88 1.88 0 0 0 0-3.75ZM20.25 20.25v-6.05c0-3.24-1.73-4.75-4.05-4.75-1.86 0-2.69 1.02-3.15 1.73V8.5h-3.19v11.75h3.19v-5.82c0-1.54.29-3.03 2.2-3.03 1.88 0 1.91 1.76 1.91 3.13v5.72h3.09Z" fill="currentColor"/></svg>
+          </a>
+          <a aria-label="X (Twitter)" href="#" title="X">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.2 3.75h3.04l-6.64 7.59 7.8 8.91H16.2l-4.86-5.7-5.56 5.7H2.75l7.1-7.28-7.54-8.22H8.1l4.4 4.8 5.7-5.8Z" fill="currentColor"/></svg>
+          </a>
+        </div>
+        <span class="tag">Follow our journey</span>
+      </div>
+
+      <div class="foot">
+        <span class="tag">© <span id="year"></span> High Up Management</span>
+        <span class="tag">PEA • Dubai, UAE</span>
+      </div>
+
+      <div class="blurOrb orb1"></div>
+      <div class="blurOrb orb2"></div>
+    </section>
+
+    <!-- Right | Spline 3D -->
+    <section class="splineWrap">
+      <!-- Replace the src with your Spline scene's public share URL -->
+      <iframe class="spline" id="splineFrame" title="High Up — Spline Scene" allow="autoplay; fullscreen" src="https://my.spline.design/abstractshape-c7f1b5f86a3a4a3db1d90d9f3a0f9c5d/" loading="eager"></iframe>
+      <div class="splineOverlay">
+        <span class="tag">Interactive 3D by Spline</span>
+        <a class="chip" target="_blank" rel="noopener" href="https://spline.design/">What is Spline?</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // === Countdown ===
+    const LAUNCH_ISO = '2025-12-01T10:00:00+04:00'; // ← Set your launch date/time (Dubai time)
+    const launchDate = new Date(LAUNCH_ISO);
+    const $ = (id)=>document.getElementById(id);
+    const pad = (n)=> String(n).padStart(2,'0');
+
+    function tick(){
+      const now = new Date();
+      const diff = launchDate - now;
+      if (diff <= 0){
+        $('d').textContent = '00';
+        $('h').textContent = '00';
+        $('m').textContent = '00';
+        $('s').textContent = '00';
+        document.querySelector('#launchLabel').textContent = 'Launched';
+        return;
+      }
+      const s = Math.floor(diff/1000);
+      const days = Math.floor(s/86400);
+      const hrs = Math.floor((s%86400)/3600);
+      const mins = Math.floor((s%3600)/60);
+      const secs = s%60;
+      $('d').textContent = pad(days);
+      $('h').textContent = pad(hrs);
+      $('m').textContent = pad(mins);
+      $('s').textContent = pad(secs);
+    }
+    setInterval(tick, 1000); tick();
+
+    // Label + Year
+    const intl = new Intl.DateTimeFormat('en-GB', { dateStyle:'full', timeStyle:'short' });
+    document.getElementById('launchLabel').textContent = 'Launch: ' + intl.format(new Date(LAUNCH_ISO));
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // === Spline Fallback Notice ===
+    const frame = document.getElementById('splineFrame');
+    let loaded = false;
+    frame.addEventListener('load', ()=> loaded = true);
+    setTimeout(()=>{
+      if(!loaded){
+        const warn = document.createElement('div');
+        warn.textContent = '3D preview failed to load. Replace the Spline URL with your own public scene link.';
+        warn.style.position='absolute'; warn.style.top='16px'; warn.style.left='16px'; warn.style.right='16px'; warn.style.padding='14px 16px';
+        warn.style.background='rgba(0,0,0,0.55)'; warn.style.border='1px solid rgba(255,255,255,0.2)'; warn.style.borderRadius='12px';
+        warn.style.fontSize='13px'; warn.style.color='#cbd5e1';
+        frame.parentElement.appendChild(warn);
+      }
+    }, 2500);
+
+    // === Optional: keyboard focus ring only when tabbing ===
+    function handleFirstTab(e){ if(e.key==='Tab'){ document.body.classList.add('user-is-tabbing'); window.removeEventListener('keydown', handleFirstTab); } }
+    window.addEventListener('keydown', handleFirstTab);
+  </script>
+</body>
+</html>
