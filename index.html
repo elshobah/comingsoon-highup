@@ -16,7 +16,7 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;font-family:Urbanist,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(1200px 700px at 10% 10%, #111827 0%, #0b0e13 50%), var(--bg); color:var(--text);}
-    .grid{display:grid; grid-template-columns: 1.15fr 1fr; min-height:100dvh}
+    .grid{display:grid; grid-template-columns: 1fr; min-height:100dvh; max-width:1100px; margin:0 auto} 
     .left{padding: clamp(24px, 4vw, 56px); position:relative; display:flex; flex-direction:column; gap:28px}
     .nav{display:flex; align-items:center; justify-content:space-between}
     .brand{display:flex; gap:12px; align-items:center}
@@ -32,19 +32,19 @@
     .form{display:flex; gap:10px; margin-top:8px}
     input[type=email]{flex:1; padding:14px 16px; border-radius:12px; background:#0b0f16; border:1px solid rgba(255,255,255,0.06); color:var(--text)}
     button{padding:14px 18px; border-radius:12px; border:none; font-weight:600; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#001318; cursor:pointer}
+    .contactBtn{display:block; text-align:center; padding:16px 18px; border-radius:12px; font-weight:700; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#001318; text-decoration:none; margin-top:16px}
     .socials{display:flex; gap:12px; align-items:center}
     .socials a{display:grid; place-items:center; width:40px; height:40px; border-radius:12px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03)}
     .foot{margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:16px}
-    .splineWrap{position:relative; height:100%; overflow:hidden}
-    .spline{position:absolute; inset:0; border:0; width:100%; height:100%}
-    .splineOverlay{position:absolute; inset:auto 0 0 0; padding:18px 24px; display:flex; justify-content:space-between; align-items:center; background:linear-gradient(180deg, transparent, rgba(11,14,19,0.45) 40%, rgba(11,14,19,0.85));}
+    
+    
+    
     .tag{font-size:12px; color:#9bb0c7}
     .chip{padding:6px 10px; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); font-size:12px}
     .blurOrb{position:absolute; filter:blur(80px); opacity:.6; pointer-events:none}
     .orb1{top: -60px; left:-60px; width:220px; height:220px; background:radial-gradient(circle at 30% 30%, #3fd8c7, transparent 60%)}
     .orb2{bottom: 10%; right:-60px; width:260px; height:260px; background:radial-gradient(circle at 70% 30%, #6aa5ff, transparent 60%)}
-    @media (max-width: 980px){
-      .grid{grid-template-columns:1fr}
+    @media (max-width: 980px){ .left{padding:24px} }
       .splineWrap{height:52vh}
     }
   </style>
@@ -61,7 +61,6 @@
             <span style="font-size:12px; color:var(--muted)">Dubai, UAE</span>
           </div>
         </div>
-        <a class="chip" href="mailto:ayu@highup.ae">Contact</a>
       </div>
 
       <span class="pill">Official Website</span>
@@ -79,10 +78,7 @@
           <div class="time"><div class="num" id="m">–</div><div class="lab">Minutes</div></div>
           <div class="time"><div class="num" id="s">–</div><div class="lab">Seconds</div></div>
         </div>
-        <form class="form" onsubmit="event.preventDefault(); alert('Thanks! We\'ll notify you.'); this.reset();">
-          <input type="email" placeholder="Your email" required>
-          <button type="submit">Notify Me</button>
-        </form>
+        <a class="contactBtn" href="mailto:ayu@highup.ae" title="Contact High Up">Contact Us</a>
       </div>
 
       <div style="display:flex; gap:16px; align-items:center">
@@ -108,21 +104,11 @@
       <div class="blurOrb orb1"></div>
       <div class="blurOrb orb2"></div>
     </section>
-
-    <!-- Right | Spline 3D -->
-    <section class="splineWrap">
-      <!-- Replace the src with your Spline scene's public share URL -->
-      <iframe class="spline" id="splineFrame" title="High Up — Spline Scene" allow="autoplay; fullscreen" src="https://my.spline.design/abstractshape-c7f1b5f86a3a4a3db1d90d9f3a0f9c5d/" loading="eager"></iframe>
-      <div class="splineOverlay">
-        <span class="tag">Interactive 3D by Spline</span>
-        <a class="chip" target="_blank" rel="noopener" href="https://spline.design/">What is Spline?</a>
-      </div>
-    </section>
   </div>
 
   <script>
     // === Countdown ===
-    const LAUNCH_ISO = '2025-12-01T10:00:00+04:00'; // ← Set your launch date/time (Dubai time)
+    const LAUNCH_ISO = '2025-11-10T10:00:00+04:00'; // ← Set your launch date/time (Dubai time)
     const launchDate = new Date(LAUNCH_ISO);
     const $ = (id)=>document.getElementById(id);
     const pad = (n)=> String(n).padStart(2,'0');
@@ -154,21 +140,6 @@
     const intl = new Intl.DateTimeFormat('en-GB', { dateStyle:'full', timeStyle:'short' });
     document.getElementById('launchLabel').textContent = 'Launch: ' + intl.format(new Date(LAUNCH_ISO));
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // === Spline Fallback Notice ===
-    const frame = document.getElementById('splineFrame');
-    let loaded = false;
-    frame.addEventListener('load', ()=> loaded = true);
-    setTimeout(()=>{
-      if(!loaded){
-        const warn = document.createElement('div');
-        warn.textContent = '3D preview failed to load. Replace the Spline URL with your own public scene link.';
-        warn.style.position='absolute'; warn.style.top='16px'; warn.style.left='16px'; warn.style.right='16px'; warn.style.padding='14px 16px';
-        warn.style.background='rgba(0,0,0,0.55)'; warn.style.border='1px solid rgba(255,255,255,0.2)'; warn.style.borderRadius='12px';
-        warn.style.fontSize='13px'; warn.style.color='#cbd5e1';
-        frame.parentElement.appendChild(warn);
-      }
-    }, 2500);
 
     // === Optional: keyboard focus ring only when tabbing ===
     function handleFirstTab(e){ if(e.key==='Tab'){ document.body.classList.add('user-is-tabbing'); window.removeEventListener('keydown', handleFirstTab); } }
